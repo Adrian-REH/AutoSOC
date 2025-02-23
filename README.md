@@ -1,2 +1,2 @@
 # AutoSOC 
-Un sistema que automatiza la recepción, categorización y gestión de tickets de soporte a través de Power Automate, APIs externas y buenas prácticas de desarrollo.
+Este proyecto automatiza la detección, clasificación y respuesta ante incidentes de seguridad en un SOC. Utiliza Power Automate, Python y Bash para integrar herramientas de SIEM, APIs de Threat Intelligence y administración de servidores Linux.
