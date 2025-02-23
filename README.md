@@ -22,7 +22,7 @@ Este proyecto automatiza la detección, clasificación y respuesta ante incident
 
 ## Estructura del Proyecto
 ```
-SOC-Incident-Automation/
+AutoSoc/
 ├── README.md  # Documentación del proyecto
 ├── LICENSE  # Licencia del proyecto
 ├── scripts/  # Scripts de automatización
@@ -45,7 +45,7 @@ SOC-Incident-Automation/
 1. Clonar el repositorio:  
    ```bash
    git clone https://github.com/tu_usuario/SOC-Incident-Automation.git
-   cd SOC-Incident-Automation
+   cd AutoSoc
    ```
 2. Instalar dependencias:  
    ```bash
