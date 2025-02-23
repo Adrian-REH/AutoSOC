@@ -1,44 +1,32 @@
 # SOC Incident Automation & Response
 
 ## Descripción
-Este proyecto automatiza la detección, clasificación y respuesta ante incidentes de seguridad en un SOC. Utiliza Power Automate, Python y Bash para integrar herramientas de SIEM, APIs de Threat Intelligence y administración de servidores Linux.
+Este proyecto automatiza la detección, clasificación y respuesta ante incidentes de seguridad en un SOC. Utiliza Power Automate, Python y Bash para integrar herramientas de SIEM, APIs de Threat Intelligence y administración de servidores Linux, tambien orquesta contenedores y una webApp para testear su funcionamiento
 
 ## Características
 ✅ Automatización de respuesta a incidentes de ciberseguridad.  
 ✅ Integración con SIEM, APIs de Threat Intelligence y bases de datos.  
-✅ Scripts en Linux (Bash/Python) para bloqueo de IPs y gestión de usuarios.  
-✅ Notificaciones automáticas a Microsoft Teams o Telegram.  
-✅ Dashboard para visualización de incidentes en Flask/FastAPI.  
-✅ Buenas prácticas: SOLID, pruebas con pytest, documentación con Sphinx.  
+✅ Scripts en Linux (Bash/Python) para bloqueo y seguimiento de IPs.  
+✅ Notificaciones automáticas a Microsoft Teams con Power Automate.  
+✅ Buenas prácticas: SOLID, pruebas con pytest, documentación con Sphinx.
+✅ Front e-comerce.
+✅ Testear ataques y request validas.
 
 ## Tecnologías Utilizadas
 - **Power Automate**: Captura alertas desde Outlook, SIEM o Syslog.  
 - **Python + Bash**: Scripts para análisis y respuesta.  
 - **APIs de Threat Intelligence**: Integración con VirusTotal, AbuseIPDB.  
-- **SIEM (Splunk/ELK)**: Monitoreo y gestión de eventos.  
+- **SIEM (Splunk/ELK)**: Monitoreo y gestión de eventos.  (opcional)
 - **Linux (iptables, fail2ban, logs)**: Seguridad en servidores.  
 - **SQL Server / MongoDB**: Almacenamiento de incidentes.  
 - **pytest, flake8, Sphinx**: Pruebas y documentación.  
+- **JavaScript**: App e-commerce de ejemplo.
+- **Docker**: Infrastructura y Orquestador.
 
 ## Estructura del Proyecto
 ```
 AutoSoc/
-├── README.md  # Documentación del proyecto
-├── LICENSE  # Licencia del proyecto
-├── scripts/  # Scripts de automatización
-│   ├── incident_handler.py  # Script principal
-│   ├── block_ip.sh  # Bloqueo de IPs en Linux
-│   ├── disable_user.py  # Deshabilita usuario en Active Directory
-│   ├── send_alerts.py  # Envía notificaciones a Teams/Telegram
-│   ├── fetch_threat_intel.py  # Consulta APIs de Threat Intelligence
-├── tests/  # Pruebas unitarias con pytest
-├── docs/  # Documentación con Sphinx
-├── config/  # Configuración del sistema
-├── logs/  # Registro de actividad
-├── web/  # Dashboard en Flask/FastAPI (opcional)
-├── .gitignore  # Archivos a excluir
-├── requirements.txt  # Librerías necesarias
-├── docker-compose.yml  # Contenedor con SIEM y herramientas
+
 ```
 
 ## Instalación y Uso
