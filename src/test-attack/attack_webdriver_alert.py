@@ -2,6 +2,7 @@ from selenium import webdriver
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+import argparse
 
 def init_selenium(url):
 	try:
@@ -16,12 +17,20 @@ def init_selenium(url):
 		return None
 
 
- 
-# Ejecutar el programa principal
+def main():
+	parser = argparse.ArgumentParser(description="Ejemplo de manejo de argumentos en Python")
+
+	parser.add_argument("url", type=str, help="Url para testear")
+	args = parser.parse_args()
+
+	time.sleep(4)
+	driver = init_selenium(args.url)
+	if driver:
+		time.sleep(4)
+		driver.quit()
+
+
 if __name__ == "__main__":
-	url="https://store.local.com/"
-	time.sleep(4)
-	driver = init_selenium(url)
-	time.sleep(4)
-	driver.quit()
+    main()
+
 
