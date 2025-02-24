@@ -29,7 +29,7 @@ services:
     networks:
       - srv_network
     healthcheck:
-      test: ["CMD","curl", "http://localhost/healtcheck"] # TODO Cambiar el test de Healtcheck por uno personalizado
+      test: ["CMD","curl","-fs", "http://localhost:3030/"] # TODO Cambiar el test de Healtcheck por uno personalizado
       interval: 30s
       retries: 3
       start_period: 5s
@@ -40,7 +40,6 @@ services:
       context: ./service
       dockerfile: ./Dockerfile
     container_name: service
-    restart: always
     env_file:
       - ./.env
     volumes:
@@ -48,7 +47,7 @@ services:
     networks:
       - srv_network
     healthcheck:
-      test: ["CMD","curl", "http://localhost/health-check"] # TODO Cambiar el test de Healtcheck por uno personalizado
+      test: ["CMD", "curl", "-fs", "http://localhost:9090/api/actions/health-check/"]
       interval: 30s
       retries: 3
       start_period: 5s
