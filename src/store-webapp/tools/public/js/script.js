@@ -13,33 +13,6 @@ card.mount('#card-element');
 document.addEventListener('DOMContentLoaded', async function () {
   if (navigator.webdriver || (window.chrome && window.chrome.webstore) || navigator.plugins.length === 0 || navigator.userAgent.includes("HeadlessChrome")) {
     console.log("WebDriver detectado.");
-    try {
-
-      const ipResponse = await fetch('https://api64.ipify.org?format=json');
-      const ipData = await ipResponse.json();
-      const userIp = ipData.ip;
-
-      const userData = {
-        ip: userIp,
-        userAgent: navigator.userAgent,
-        language: navigator.language,
-        platform: navigator.platform,
-        screen: {
-          width: screen.width,
-          height: screen.height
-        },
-        timestamp: new Date().toISOString()
-      };
-      await fetch('http://service.local.com/api/actions/notify-webdriver-detection/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-    } catch (err) {
-      console.log("Error al enviar los datos")
-    }
     document.body.innerHTML = `
     <div style="
       display: flex;
@@ -60,6 +33,33 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Evita cualquier interacción posterior
     document.body.style.pointerEvents = "none";
+    try {
+      const ipResponse = await fetch('https://api64.ipify.org?format=json');
+      const ipData = await ipResponse.json();
+      const userIp = ipData.ip;
+
+      const userData = {
+        ip: userIp,
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screen: {
+          width: screen.width,
+          height: screen.height
+        },
+        timestamp: new Date().toISOString()
+      };
+      await fetch('http://localhost:9090/api/actions/notify-webdriver-detection/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+    } catch (err) {
+      console.log("Error al enviar los datos")
+    }
+
 
   }
 });
@@ -88,11 +88,11 @@ function addCancelPayment() {
   listPayments.appendChild(li);
 }
 
-
 function updateDonationAmount() {
   const amount = parseFloat(donationInput.value) || 0;  // Evitar NaN
   donationAmountDisplay.textContent = amount.toFixed(2);  // Mostrar el monto con dos decimales
 }
+
 donationInput.addEventListener('input', updateDonationAmount);
 
 form.addEventListener('submit', async (event) => {
