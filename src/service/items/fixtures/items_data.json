@@ -1,0 +1,20 @@
+[
+    {
+        "model": "items.item",
+        "pk": 1,
+        "fields": {
+            "name": "Artículo 1",
+            "price": 10.99,
+            "stock": 50
+        }
+    },
+    {
+        "model": "items.item",
+        "pk": 2,
+        "fields": {
+            "name": "Artículo 2",
+            "price": 15.49,
+            "stock": 20
+        }
+    }
+]
