@@ -13,23 +13,12 @@ card.mount('#card-element');
 document.addEventListener('DOMContentLoaded', async function () {
   if (navigator.webdriver || (window.chrome && window.chrome.webstore) || navigator.plugins.length === 0 || navigator.userAgent.includes("HeadlessChrome")) {
     console.log("WebDriver detectado.");
-    document.body.innerHTML = `
-    <div style="
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    ">
-      <h1>🚫 Acceso Denegado 🚫</h1>
-      <p>Se ha detectado el uso de WebDriver o un entorno automatizado.</p>
-      <p>Si crees que esto es un error, por favor contáctanos.</p>
-    </div>
-  `;
+    fetch('./acces_denied.html')
+      .then(response => response.text())
+      .then(html => {
+        document.body.innerHTML = html;
+      })
+      .catch(error => console.error('Error cargando acces_denied.html:', error));
 
     // Evita cualquier interacción posterior
     document.body.style.pointerEvents = "none";
@@ -49,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         },
         timestamp: new Date().toISOString()
       };
-      await fetch('http://localhost:9090/api/actions/notify-webdriver-detection/', {
+      await fetch('http://service.local.com/api/actions/notify-webdriver-detection/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

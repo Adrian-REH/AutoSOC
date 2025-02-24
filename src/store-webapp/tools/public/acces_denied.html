@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Acceso Denegado</title>
+	<style>
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes blink {
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.3;
+			}
+		}
+
+		@keyframes backgroundAnimation {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		body {
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background: linear-gradient(-45deg, #1a1a1a, #333333, #111111, #000000);
+			background-size: 400% 400%;
+			color: white;
+			font-family: 'Arial', sans-serif;
+			text-align: center;
+			animation: backgroundAnimation 6s infinite alternate ease-in-out;
+		}
+
+		.container {
+			animation: fadeIn 1s ease-out;
+		}
+
+		h1 {
+			font-size: 2.5rem;
+			animation: blink 1.5s infinite;
+		}
+
+		p {
+			font-size: 1.2rem;
+			margin: 10px 0;
+			opacity: 0;
+			animation: fadeIn 1s ease-out forwards;
+			animation-delay: 0.5s;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>🚫 Acceso Denegado 🚫</h1>
+		<p>Se ha detectado el uso de WebDriver o un entorno automatizado.</p>
+		<p>Si crees que esto es un error, por favor contáctanos.</p>
+	</div>
+</body>
+
+</html>
