@@ -3,6 +3,7 @@ from django.urls import path
 from payments.views import process_payment
 from items.views import list_items, decrease_stock
 from actions.views import block_ip, follow_ip, webdriver_alert, csp_alert, health_check
+from user_sessions.views import list_sessions, save_session
 
 urlpatterns = [
     path('api/items/list/', list_items),
@@ -13,4 +14,6 @@ urlpatterns = [
     path('api/actions/follow/ip/', follow_ip),
     path('api/actions/notify-webdriver-detection/', webdriver_alert),
     path('api/actions/execute/cspalert/', csp_alert),
+    path('api/user-sessions/list/', list_sessions),
+    path('api/user-sessions/', save_session),
 ]

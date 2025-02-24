@@ -1,0 +1,12 @@
+[
+	{
+        "ip": "5.3.1.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
+        "language": "es-419",
+        "platform": "Win32",
+        "screen": {"width": 1715, "height": 965}, "timestamp": "2025-02-24T20:12:30.138Z",
+        "security_level": "high",
+        "alert_type": "WebDriver detection",
+        "is_blocked": false
+    }
+]

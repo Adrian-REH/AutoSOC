@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'corsheaders',
     "items",
     "actions",
+    "user_sessions",
 ]
 
 DATABASES = {
