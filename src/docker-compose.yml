@@ -1,0 +1,97 @@
+services:
+
+  nginx:
+    build:
+    context: ./src/nginx
+    dockerfile: ./Dockerfile
+    container_name: nginx
+    restart: always
+    env_file:
+    - ./.env
+    ports:
+    - "443:443"
+    volumes:
+    - vo_srv:/var/www/html
+    depends_on:
+    service:
+      condition: service_healthy
+      restart: true
+    networks:
+    - srv_network
+
+  db:
+    build:
+    context: ./src/db
+    dockerfile: ./Dockefile
+    container_name: db
+    env_file:
+      - ./.env
+    volumes:
+      - vo_db:/var/www/html
+    networks:
+      - srv_network
+    healthcheck:
+      test: ["curl", "http://localhost/healtcheck"] # TODO Cambiar el test de Healtcheck por uno personalizado
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 5s
+
+  store-webapp:
+    build:
+    context: ./src/store
+    dockerfile: ./Dockefile
+    container_name: store-webapp
+    env_file:
+      - ./.env
+    networks:
+      - srv_network
+    healthcheck:
+      test: ["curl", "http://localhost/healtcheck"] # TODO Cambiar el test de Healtcheck por uno personalizado
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 5s
+
+  service:
+    build:
+      context: ./src/service
+      dockerfile: ./Dockerfile
+    container_name: service
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - vo_srv:/var/www/html
+    networks:
+      - srv_network
+    depends_on: # Dependencias de wordpress
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["curl", "http://localhost/healt-check"] # TODO Cambiar el test de Healtcheck por uno personalizado
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 5s
+
+volumes:
+  vo_srv:
+    name: service
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/adherrer/data/service
+  vo_db:
+    name: psql
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/adherrer/data/psql
+
+networks:
+  srv_network:
+    name: srv_network
+    driver: bridge
