@@ -11,6 +11,6 @@ urlpatterns = [
     path('api/actions/health-check/', health_check),
     path('api/actions/block/ip/', block_ip),
     path('api/actions/follow/ip/', follow_ip),
-    path('api/actions/execute/webdriver/', webdriver_alert),
+    path('api/actions/notify-webdriver-detection/', webdriver_alert),
     path('api/actions/execute/cspalert/', csp_alert),
 ]

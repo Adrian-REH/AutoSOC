@@ -26,7 +26,7 @@ content-Type: application/json
 }
 
 ###
-POST  http://localhost:9090/api/actions/execute/webdriver/ HTTP/1.1
+POST  http://localhost:9090/api/actions/notify-webdriver-detection/ HTTP/1.1
 content-Type: application/json
 
 {
