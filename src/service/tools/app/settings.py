@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "payments",
+    'corsheaders',
     "items",
     "actions",
 ]
@@ -48,6 +49,7 @@ TEMPLATES = [
     },
 ]
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',  # ← Necesario para Admin
     'django.middleware.common.CommonMiddleware',
@@ -59,6 +61,6 @@ MIDDLEWARE = [
 
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
-
+CORS_ALLOW_ALL_ORIGINS  = True
 ROOT_URLCONF = 'app.urls'
 

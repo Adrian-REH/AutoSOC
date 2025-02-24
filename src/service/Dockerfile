@@ -4,10 +4,12 @@ FROM debian:bookworm-slim
 # Variables de entorno
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive \
+    DJANGO_SETTINGS_MODULE=app.settings
 
 # Instalar dependencias del sistema y Python 3
 RUN apt-get update && apt-get install -y \
+    curl \
     python3 python3-pip python3-venv python3-dev \
     libpq-dev gcc \
     && rm -rf /var/lib/apt/lists/*
@@ -16,18 +18,19 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copiar archivos de requerimientos
-COPY requirements.txt /app/
+COPY /tools/ /app/
 
 # Crear un entorno virtual e instalar dependencias
 RUN python3 -m venv /app/venv && \
     /app/venv/bin/pip install --no-cache-dir --upgrade pip && \
     /app/venv/bin/pip install --no-cache-dir -r requirements.txt
 
+
 # Copiar el código fuente
 COPY . /app/
 
 # Exponer el puerto 8000
-EXPOSE 8000
+EXPOSE 9090
 
 # Comando de inicio con Gunicorn
-CMD ["/app/venv/bin/gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["/app/venv/bin/gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:9090"]
