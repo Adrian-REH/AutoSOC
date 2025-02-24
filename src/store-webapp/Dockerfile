@@ -15,10 +15,10 @@ RUN apt-get update && \
     apt-get clean
 
 # Copia los archivos de tu proyecto al contenedor
-COPY /requirements/bonus/static-page/tools/server.ts /app/
-COPY /requirements/bonus/static-page/tools/tsconfig.json /app/
-COPY /requirements/bonus/static-page/tools/public/ /app/public/
-COPY /requirements/bonus/static-page/tools/package.json /app/
+COPY /tools/server.ts /app/
+COPY /tools/tsconfig.json /app/
+COPY /tools/public/ /app/public/
+COPY /tools/package.json /app/
 
 RUN npm install
 EXPOSE 3030
