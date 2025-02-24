@@ -13,30 +13,30 @@ const form = document.getElementById('payment-form');
 const listPayments = document.getElementById('payments-list');
 
 function addAceptedPayment() {
-    const li = document.createElement('li');
-    li.classList.add('card');
-    li.textContent = `Donacion de $${(parseInt(donationInput.value) || 0)} Aceptada`;
+  const li = document.createElement('li');
+  li.classList.add('card');
+  li.textContent = `Donacion de $${(parseInt(donationInput.value) || 0)} Aceptada`;
 
-    li.classList.add('green');
+  li.classList.add('green');
 
-    listPayments.appendChild(li);
+  listPayments.appendChild(li);
 }
 
 function addCancelPayment() {
-    const li = document.createElement('li');
-    li.classList.add('card');
+  const li = document.createElement('li');
+  li.classList.add('card');
 
-    li.textContent = `Donacion de $${(parseInt(donationInput.value) || 0)} Cancelada`;
+  li.textContent = `Donacion de $${(parseInt(donationInput.value) || 0)} Cancelada`;
 
-    li.classList.add('red');
+  li.classList.add('red');
 
-    listPayments.appendChild(li);
+  listPayments.appendChild(li);
 }
 
 
 function updateDonationAmount() {
-    const amount = parseFloat(donationInput.value) || 0;  // Evitar NaN
-    donationAmountDisplay.textContent = amount.toFixed(2);  // Mostrar el monto con dos decimales
+  const amount = parseFloat(donationInput.value) || 0;  // Evitar NaN
+  donationAmountDisplay.textContent = amount.toFixed(2);  // Mostrar el monto con dos decimales
 }
 donationInput.addEventListener('input', updateDonationAmount);
 
@@ -51,7 +51,7 @@ form.addEventListener('submit', async (event) => {
   } else {
     console.log('Token:', token);
 
-    const response = await fetch('https://paymentsrv.42.fr/procesar-pago', {
+    const response = await fetch('https://service.local.com/api/payments/process-payment/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -64,9 +64,9 @@ form.addEventListener('submit', async (event) => {
     });
 
     if (response.ok) {
-        addAceptedPayment()
+      addAceptedPayment()
     } else {
-        addCancelPayment()
+      addCancelPayment()
     }
   }
 });
