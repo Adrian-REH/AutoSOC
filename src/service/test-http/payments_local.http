@@ -1,0 +1,37 @@
+odontogram//CREATE UNIQUE
+###
+POST  http://localhost:9090/api/payments/process-payment/ HTTP/1.1
+content-Type: application/json
+
+{
+    "amount": 100,
+    "email": "adrianherrera.r.e@gmail.com",
+    "token": "tok_visa"
+}
+
+//ALL GET
+###
+GET  https://appointmentibiocd.azurewebsites.net/api/odontogram HTTP/1.1
+
+//UNIQUE GET
+###
+GET  https://appointmentibiocd.azurewebsites.net/api/odontogram/639e6b1ac26ea5675c1ae284 HTTP/1.1
+
+###
+GET  https://appointmentibiocd.azurewebsites.net/api/odontogram/medical/ccvdfs HTTP/1.1
+
+###
+GET  https://appointmentibiocd.azurewebsites.net/api/odontogram/patient/svv HTTP/1.1
+
+//UPDATE UNIQUE ID
+###
+PUT   https://appointmentibiocd.azurewebsites.net/api/odontogram/639e6b1ac26ea5675c1ae284 HTTP/1.1
+content-Type: application/json
+
+{
+    "data":"05032023",
+    "patient":"svv",
+    "medical":"ccvdfs"
+}
+###
+DELETE    https://appointmentibiocd.azurewebsites.net/api/odontogram/640a292c9d190c8b27524151 HTTP/1.1

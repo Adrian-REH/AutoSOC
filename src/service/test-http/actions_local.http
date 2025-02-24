@@ -1,0 +1,43 @@
+
+###
+GET  http://localhost:9090/api/actions/health-check/ HTTP/1.1
+
+###
+POST  http://localhost:9090/api/actions/block/ip/ HTTP/1.1
+content-Type: application/json
+
+{
+    "ip":"192.168.0.1"
+}
+
+###
+POST  http://localhost:9090/api/actions/block/ip/ HTTP/1.1
+content-Type: application/json
+
+{
+    "ip":"192.168.0.1"
+}
+###
+POST  http://localhost:9090/api/actions/follow/ip/ HTTP/1.1
+content-Type: application/json
+
+{
+    "ip":"192.168.0.1"
+}
+
+###
+POST  http://localhost:9090/api/actions/execute/webdriver/ HTTP/1.1
+content-Type: application/json
+
+{
+    "ip":"192.168.0.1"
+}
+
+###
+POST  http://localhost:9090/api/actions/execute/cspalert/ HTTP/1.1
+content-Type: application/json
+
+{
+    "ip":"192.168.0.1"
+}
+
