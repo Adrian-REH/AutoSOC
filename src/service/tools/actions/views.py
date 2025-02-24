@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .handle_email import send_email
+from user_sessions.services import save_one_session
+from .services import process_webdriver_alert_and_notify
 import requests
 
 @api_view(['GET'])
@@ -27,31 +29,9 @@ def webdriver_alert(request):
         'Content-Type': 'application/json',
     }
     response = requests.post(url, json=data, headers=headers) """
-
-    ip = request.data.get('ip')
-    userAgent = request.data.get('userAgent','Desconocido')
-    language = request.data.get('language','Desconocido')
-    platform = request.data.get('platform','Desconocido')
-    height = request.data.get('screen', {}).get('height', 'N/A')
-    width = request.data.get('screen', {}).get('width', 'N/A')
-    timestamp = request.data.get('timestamp', 'Desconocido')
-    data = request.data.copy()
-    data["security_level"] = "high"
-    data["alert_type"] = "WebDriver detection"
-    body = f"""
-    Se ha detectado un nuevo evento con la siguiente información:
-
-    📍 Dirección IP: {ip}
-    🖥️ User-Agent: {userAgent}
-    🌍 Idioma: {language}
-    💻 Plataforma: {platform}
-    📏 Resolución de pantalla: {height} x {width}
-    🕒 Timestamp: {timestamp}
-
-    🔒 Nivel de seguridad: high
-    ⚠️ Tipo de alerta: Webdriver detection"""
-    subject = f"""AutoSoc - IP: {ip}, Alert: Webdriver detection, level: high """
-    send_email(body, subject)
+    ip = request.data.get("ip")
+    timestamp = request.data.get("timestamp")
+    process_webdriver_alert_and_notify(request)
     return Response({"message": f"Se ejecuto PowerAction Alert Use WebDriver IP: {ip} Timestamp: {timestamp}"})
 
 @api_view(['POST'])
