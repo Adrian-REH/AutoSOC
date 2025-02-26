@@ -18,16 +18,14 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copiar archivos de requerimientos
-COPY /tools/ /app/
 
-# Crear un entorno virtual e instalar dependencias
-RUN python3 -m venv /app/venv && \
-    /app/venv/bin/pip install --no-cache-dir --upgrade pip && \
-    /app/venv/bin/pip install --no-cache-dir -r requirements.txt
+COPY /tools/ /tmp/app/
 
+COPY /script/entrypoint.sh /entrypoint.sh
 
-# Copiar el código fuente
-COPY . /app/
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Exponer el puerto 8000
 EXPOSE 9090
