@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       const userData = {
         ip: userIp,
+
         user_agent: navigator.userAgent,
         language: navigator.language,
         platform: navigator.platform,
