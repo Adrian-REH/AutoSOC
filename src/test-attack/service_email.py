@@ -97,7 +97,7 @@ def show_notification(title, message):
         title=title,
         message=message,
         app_icon="gmail.ico",  # Solo admite .ico
-        timeout=5
+        timeout=3
     )
 
 def notify_last_email():
@@ -115,7 +115,7 @@ def notify_last_email():
 
             ultimo_id = max(ultimo_id, email_id)  # Actualizar el último ID
         mail.logout()
-        time.sleep(4)  # Revisar cada 60 segundos
+        time.sleep(3)  # Revisar cada 60 segundos
 
 
 if __name__ == "__main__":
