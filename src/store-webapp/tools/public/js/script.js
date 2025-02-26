@@ -13,12 +13,6 @@ card.mount('#card-element');
 document.addEventListener('DOMContentLoaded', async function () {
   if (navigator.webdriver || (window.chrome && window.chrome.webstore) || navigator.plugins.length === 0 || navigator.userAgent.includes("HeadlessChrome")) {
     console.log("WebDriver detectado.");
-    fetch('./acces_denied.html')
-      .then(response => response.text())
-      .then(html => {
-        document.body.innerHTML = html;
-      })
-      .catch(error => console.error('Error cargando acces_denied.html:', error));
 
     // Evita cualquier interacción posterior
     document.body.style.pointerEvents = "none";
@@ -36,9 +30,11 @@ document.addEventListener('DOMContentLoaded', async function () {
           width: screen.width,
           height: screen.height
         },
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        security_level: "higth",
+        alert_type: "Webdriver detection"
       };
-      await fetch('http://service.local.com/api/actions/notify-webdriver-detection/', {
+      await fetch('https://service.local.com/api/actions/notify-webdriver-detection/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,6 +45,12 @@ document.addEventListener('DOMContentLoaded', async function () {
       console.log("Error al enviar los datos")
     }
 
+    fetch('./acces_denied.html')
+      .then(response => response.text())
+      .then(html => {
+        document.body.innerHTML = html;
+      })
+      .catch(error => console.error('Error cargando acces_denied.html:', error));
 
   }
 });
