@@ -8,14 +8,10 @@ def save_one_session(request_data):
         serializer = UserSessionSerializer(data=request_data)
         
         if serializer.is_valid():
-            if sessions_count > 4:
-                serializer.validated_data['is_blocked'] = True
-            else:
-                serializer.validated_data['is_blocked'] = False
-            serializer.save()
+            instance = serializer.save(is_blocked=(sessions_count > 4))
             return {
                 'alert_count': sessions_count,
-                'session_data': serializer.data
+                'session_data': serializer(instance).data
             }
         else:
             raise ValidationError(serializer.errors)
