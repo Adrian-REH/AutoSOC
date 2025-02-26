@@ -4,6 +4,7 @@ from .handle_email import send_email
 from user_sessions.services import save_one_session
 from .services import process_webdriver_alert_and_notify
 import requests
+from rest_framework import status
 
 @api_view(['GET'])
 def health_check(request):
@@ -31,7 +32,13 @@ def webdriver_alert(request):
     response = requests.post(url, json=data, headers=headers) """
     ip = request.data.get("ip")
     timestamp = request.data.get("timestamp")
-    process_webdriver_alert_and_notify(request)
+    try:
+        process_webdriver_alert_and_notify(request)
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return Response({"message": "Error"}, status=status.HTTP_400_BAD_REQUEST)
+        
+
     return Response({"message": f"Se ejecuto PowerAction Alert Use WebDriver IP: {ip} Timestamp: {timestamp}"})
 
 @api_view(['POST'])

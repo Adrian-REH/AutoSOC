@@ -5,12 +5,13 @@ from user_sessions.services import save_one_session
 import requests
 
 def process_webdriver_alert_and_notify(request):
-	session_processed = save_one_session(request)
+	session_processed = save_one_session(request.data)
 	if session_processed is None:
 		return {"error": "Error processing session"}
 
 	alert_count = session_processed.get("alert_count")
 	is_blocked = session_processed.get("is_blocked")
+	ip = request.data.get("ip")
 	data = request.data.copy()
 	data["security_level"] = "high"
 	data["alert_type"] = "WebDriver detection"
