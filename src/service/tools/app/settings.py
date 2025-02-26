@@ -68,3 +68,9 @@ PASS_APP_EMAIL= os.getenv("PASS_APP_EMAIL")
 CORS_ALLOW_ALL_ORIGINS  = True
 ROOT_URLCONF = 'app.urls'
 
+
+NGINX_BLOCKLIST = "blocked_ips.conf"
+HOST_RABBITMQ = os.getenv("HOST_RABBITMQ")
+
+if not os.path.exists(NGINX_BLOCKLIST):
+	open(NGINX_BLOCKLIST, "w").close()  # Crea el archivo vacío si no existe
