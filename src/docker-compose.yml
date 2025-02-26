@@ -16,6 +16,17 @@ services:
       service:
         condition: service_healthy
         restart: true
+      rabbitmq:
+        condition: service_started
+    networks:
+    - srv_network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     networks:
     - srv_network
 
@@ -43,9 +54,12 @@ services:
     env_file:
       - ./.env
     volumes:
-      - vo_srv:/var/www/html
+      - vo_srv:/app/
     networks:
       - srv_network
+    depends_on:
+      rabbitmq:
+        condition: service_started
     healthcheck:
       test: ["CMD", "curl", "-fs", "http://localhost:9090/api/actions/health-check/"]
       interval: 30s
