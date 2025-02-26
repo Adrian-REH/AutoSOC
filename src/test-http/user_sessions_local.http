@@ -16,7 +16,7 @@ content-Type: application/json
 
 //ALL GET
 ###
-GET  http://localhost:9090/api/user-sessions/list/ HTTP/1.1
+GET  https://service.local.com/api/user-sessions/list/ HTTP/1.1
 
 //UNIQUE GET
 ###
@@ -39,7 +39,7 @@ content-Type: application/json
     "medical":"ccvdfs"
 }
 ###
-DELETE    http://localhost:9090/api/user-sessions/ HTTP/1.1
+DELETE    https://service.local.com/api/user-sessions/delete/ip/ HTTP/1.1
 content-Type: application/json
 
 {
