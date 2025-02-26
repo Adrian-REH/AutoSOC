@@ -17,7 +17,7 @@ def list_sessions(request):
 
 @api_view(['POST'])
 def save_session(request):
-    session = save_one_session(request.data)
+    session = save_one_session(request.data, request.data.get("ip"))
 
     if session:
         return Response(session, status=status.HTTP_201_CREATED)
