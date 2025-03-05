@@ -55,6 +55,8 @@ services:
       - ./.env
     volumes:
       - vo_srv:/app/
+    ports:
+      - "9090:9090"
     networks:
       - srv_network
     depends_on:

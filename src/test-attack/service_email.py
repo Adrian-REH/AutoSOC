@@ -74,7 +74,6 @@ def fetch_last_emails(mail, ultimo_id):
                                 content_disposition = str(part.get("Content-Disposition"))
                                 try:
                                     body = part.get_payload(decode=True).decode()
-                                    print(f"multi-part: {body}")
                                 except:
                                     pass
                         else:
@@ -82,8 +81,7 @@ def fetch_last_emails(mail, ultimo_id):
                             # get the email body
                             body = msg.get_payload(decode=True).decode()
                             if content_type == "text/plain":
-                                # print only text email parts
-                                print(body)
+                                print("")
                         nuevos.append((i, { "msg_from" :msg_from, "subject":subject, "body":body}))
         return nuevos
     except Exception as e:

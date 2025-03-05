@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       console.log("Error al enviar los datos")
     }
 
-    fetch('./acces_denied.html')
+    fetch('./access_denied.html')
       .then(response => response.text())
       .then(html => {
         document.body.innerHTML = html;

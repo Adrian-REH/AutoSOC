@@ -26,15 +26,15 @@ def process_webdriver_alert_and_notify(request):
 		# Si es necesario trabajar con request.data, puedes hacerlo de la siguiente manera
 		data = request.data.copy()  # Si es necesario modificar 'data' sin afectar el original
 
-		data["security_level"] = "high"
+		data["security_level"] = "mid"
 		data["alert_type"] = "WebDriver detection"
-		subject = f"""AutoSoc - IP: {ip}, Alert: N° - {alert_count} Webdriver detection, level: high """
+		subject = f"""AutoSoc - IP: {ip}, Alert: N° - {alert_count} Webdriver detection, level: {data["security_level"]} """
 		if is_blocked:
-			subject = f"""AutoSoc - IP: {ip} ¡Is Blocked!, Alert: Webdriver detection, level: high """
-			print(subject)
+			subject = f"""AutoSoc - IP: {ip} ¡Is Blocked!, Alert: Webdriver detection, level: {data["security_level"]} """
 			for ip in ips:
 				rabbitmq_send_ip(ip.strip(), True)
 
+		print(subject)
 		body = f"""
 		Se ha detectado un nuevo evento con la siguiente información:
 
@@ -47,7 +47,6 @@ def process_webdriver_alert_and_notify(request):
 
 		🔒 Nivel de seguridad: high
 		⚠️ Tipo de alerta: Webdriver detection"""
-
 		send_email(body, subject)
 
 
