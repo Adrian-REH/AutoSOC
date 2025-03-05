@@ -1,23 +1,18 @@
-# SOC Incident Automation
+# Detección y mitigación de bots en una arquitectura distribuida
+El sistema detecta cuando un bot intenta realizar pagos y responde de forma automatizada:
 
-## Descripción
-Este proyecto automatiza la detección, clasificación y respuesta ante incidentes de seguridad en un SOC. Utiliza Power Automate, Python y Bash para integrar para bloquear IPS y Automatizar usando Apis, tambien orquesta contenedores y una webApp para testear el funcionamiento del sistema y las Alertas.
+1️⃣ Frontend detecta la actividad del bot y alerta al servicio de monitoreo.
+2️⃣ El servicio de monitoreo rastrea la IP y, si detecta abuso, publica un mensaje en RabbitMQ.
+3️⃣ Nginx recibe la notificación y bloquea la IP para evitar futuros intentos maliciosos.
 
-## Características
-✅ Automatización de respuesta a incidentes de ciberseguridad.  
-✅ Scripts en Linux (Bash/Python) para bloqueo y seguimiento de IPs.  
-✅ Notificaciones automáticas a email con Power Automate.
-✅ Buenas prácticas: SOLID, pruebas con pytest, documentación.
-✅ Front pasarela de pago.
-✅ Testear uso de bots(con WebDriver).
-
-## Tecnologías Utilizadas
-- **Power Automate**: Captura request desde Service.
-- **Python + Bash**: Scripts para análisis y respuesta.
-- **Linux (iptables, fail2ban, logs)**: Seguridad en servidores.
-- **pytest, flake8, Sphinx**: Pruebas y documentación.
-- **JavaScript**: App e-commerce de ejemplo.
-- **Docker**: Infrastructura y Orquestador.
+🛠️ Tecnologías utilizadas:
+✅ Backend: Python Django, Stripe
+✅ Cola de Mensajería: RabbitMQ
+✅ Frontend: JavaScript
+✅ Proxy: Nginx
+✅ Controllers-web: C++
+✅ Scripting: Python, Bash
+✅ Infraestructura: Docker
 
 ## Estructura del Proyecto
 ```
@@ -28,12 +23,16 @@ AutoSoc/
 ## Instalación y Uso
 1. Clonar el repositorio:  
    ```bash
-   git clone https://github.com/tu_usuario/SOC-Incident-Automation.git
+   git clone https://github.com/tu_usuario/AutoSoc.git
    cd AutoSoc
    ```
 2. Instalar dependencias:
    ```bash
    docker compose up -d
+   ```
+3. Test:
+   ```bash
+   py attack_webdriver_alert.py https://store.local.com
    ```
 
 ## Licencia
